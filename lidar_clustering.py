@@ -64,8 +64,8 @@ def visualize_clusters(zone_cloud, cluster_labels):
 #%%
     
 # ================== Create point cloud from data =============================
-binFileName = 'D:/General_Projects/LiDAR/1.bin'
-pcd = bin2pcd(binFileName,False)
+binFileName = '.../1.bin' # choose bin path
+pcd = bin2pcd(binFileName,False) 
 # pcd = o3d.io.read_point_cloud(pcd_file) # create pcd object from file
 cloud_xyz = np.asarray(pcd.points) # get xyz points
 o3d.visualization.draw_geometries([pcd]) # visualize point cloud
@@ -77,13 +77,21 @@ objects_cloud_xyz, ground_z = filter_ground(cloud_xyz) # filter out the ground p
 object_cloud_z1, object_cloud_z2, object_cloud_z3 = divide_zones(objects_cloud_xyz, 15, 30) # split cloud into zones
 #%%
 # create zones and update clouds based on clustering
-cluster_labels_z1, object_cloud_z1_f = find_zone_clusters(object_cloud_z1, 0.5, 50)
+
+cluster_z1_eps = 0.5
+cluster_z2_eps = 0.8
+cluster_z3_eps = 3
+cluster_z1_min_points = 50
+cluster_z2_min_points = 40
+cluster_z3_min_points = 30
+
+cluster_labels_z1, object_cloud_z1_f = find_zone_clusters(object_cloud_z1, cluster_z1_eps, cluster_z1_min_points)
 visualize_clusters(object_cloud_z1_f, cluster_labels_z1)
 
-cluster_labels_z2, object_cloud_z2_f = find_zone_clusters(object_cloud_z2, 0.8, 40)
+cluster_labels_z2, object_cloud_z2_f = find_zone_clusters(object_cloud_z2, cluster_z2_eps, cluster_z2_min_points)
 visualize_clusters(object_cloud_z2_f, cluster_labels_z2)
 
-cluster_labels_z3, object_cloud_z3_f = find_zone_clusters(object_cloud_z3, 3, 30)
+cluster_labels_z3, object_cloud_z3_f = find_zone_clusters(object_cloud_z3, cluster_z3_eps, cluster_z3_min_points)
 visualize_clusters(object_cloud_z3_f, cluster_labels_z3)
 
 # =============================================================================

@@ -65,7 +65,7 @@ def visualize_clusters(zone_cloud, cluster_labels):
     
 # ================== Create point cloud from data =============================
 binFileName = '.../1.bin' # choose bin path
-pcd = bin2pcd(binFileName,False) 
+pcd = bin2pcd(binFileName,False) # second parameter (True/False) controls whether the .bin file is saved into the working dir
 pcd = o3d.io.read_point_cloud(pcd_file) # create pcd object from file
 cloud_xyz = np.asarray(pcd.points) # get xyz points
 o3d.visualization.draw_geometries([pcd]) # visualize point cloud

@@ -6,7 +6,7 @@ import pptk
 from bin_2_pcd import bin2pcd
 
 
-BIN_FILE_NAME = 'D:/General_Projects/LiDAR/1.bin'
+BIN_FILE_NAME = 'path/to/lidar_data'
 
 
 # ====================== Filter out ground ====================================
